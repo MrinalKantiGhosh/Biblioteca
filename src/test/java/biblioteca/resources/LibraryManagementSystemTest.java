@@ -1,4 +1,4 @@
-package biblioteca.startingPoint;
+package biblioteca.resources;
 
 import biblioteca.common.Messages;
 import biblioteca.common.OutputDriver;
@@ -26,7 +26,5 @@ class LibraryManagementSystemTest {
     void checkPrintFunctionality(){
         verify(outputDriver, times(1)).print(Messages.WELCOME_MESSAGE);
     }
-
-
 
 }

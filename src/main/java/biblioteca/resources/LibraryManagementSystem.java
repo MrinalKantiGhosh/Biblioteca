@@ -1,6 +1,7 @@
-package biblioteca.startingPoint;
+package biblioteca.resources;
 
-import biblioteca.common.*;
+import biblioteca.common.Messages;
+import biblioteca.common.OutputDriver;
 
 public class LibraryManagementSystem {
     OutputDriver outputDriver;
