@@ -1,4 +1,4 @@
-package biblioteca.common;
+package biblioteca.view;
 
 public class OutputDriver {
 

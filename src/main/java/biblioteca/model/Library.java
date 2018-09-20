@@ -1,0 +1,39 @@
+package biblioteca.model;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class Library {
+    Collection<Book> books;
+
+    public Library(Collection<Book> books) {
+        this.books = books;
+    }
+
+    public List<Title> getTitleFromListOfBooks() {
+        List<Title> titleList = new ArrayList<>();
+        for (Book book : books) {
+            titleList.add(book.getTitle());
+        }
+        return titleList;
+    }
+
+    public List<Author> getAuthorFromListOfBooks() {
+        List<Author> authorList = new ArrayList<>();
+        for (Book book : books) {
+            authorList.add(book.getAuthor());
+        }
+        return authorList;
+    }
+
+    public List<Year> getYearOfPublishFromListOfBooks() {
+        List<Year> yearList = new ArrayList<>();
+        for (Book book : books) {
+            yearList.add(book.getYear());
+        }
+        return yearList;
+    }
+
+
+}
