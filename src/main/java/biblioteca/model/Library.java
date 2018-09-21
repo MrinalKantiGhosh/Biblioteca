@@ -35,5 +35,16 @@ public class Library {
         return yearList;
     }
 
+    public List<String> getBookDetails(){
+        ArrayList<String> bookDetails = new ArrayList<>();
 
+        for(Book book : books){
+            String individualBookDetail = book.getTitle().getValue()
+                    + "\t\t" + book.getAuthor().getValue() + "\t\t"
+                    + book.getYear().getValue();
+            bookDetails.add(individualBookDetail);
+        }
+
+        return bookDetails;
+    }
 }

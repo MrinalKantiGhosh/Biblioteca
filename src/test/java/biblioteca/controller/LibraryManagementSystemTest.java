@@ -1,15 +1,18 @@
 package biblioteca.controller;
 
+import biblioteca.common.Messages;
 import biblioteca.model.*;
+import biblioteca.view.InputDriver;
 import biblioteca.view.OutputDriver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class LibraryManagementSystemTest {
     Title title1;
@@ -21,10 +24,9 @@ class LibraryManagementSystemTest {
     Book book1;
     Book book2;
     List<Book> books;
-    List<Title> expectedTitles;
-    List<Author> expectedAuthors;
-    List<Year> expectedYears;
     Library library;
+    InputDriver inputDriver;
+    OutputDriver outputDriver;
 
     @BeforeEach
     void init(){
@@ -37,17 +39,42 @@ class LibraryManagementSystemTest {
         book1 = new Book(title1, author1, year1);
         book2 = new Book(title2, author2, year2);
         books = Arrays.asList(book1, book2);
-        expectedTitles = Arrays.asList(title1, title2);
-        expectedAuthors = Arrays.asList(author1, author2);
-        expectedYears = Arrays.asList(year1, year2);
         library = new Library(books);
+        inputDriver = mock(InputDriver.class);
+        outputDriver = mock(OutputDriver.class);
     }
 
-    @DisplayName("test of welcome message along with list of books present")
+    @DisplayName("zero interactions before calling start method")
     @Test
-    void testStart(){
-        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(new OutputDriver(), library);
+    void testZeroInteractionBeforeInvokingStart(){
+        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(outputDriver, library, inputDriver);
+        verifyZeroInteractions(outputDriver);
+    }
+
+    @DisplayName("show exit checking from menu")
+    @Test
+    void testForExitFromMenu(){
+        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(outputDriver, library, inputDriver);
+        when(inputDriver.getInputFromUserForSelectMenuOption()).thenReturn(0);
         libraryManagementSystem.start();
+    }
+
+    @DisplayName("show exit checking from menu")
+    @Test
+    void testForShowingListBook(){
+        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(outputDriver, library, inputDriver);
+        when(inputDriver.getInputFromUserForSelectMenuOption()).thenReturn(1).thenReturn(0);
+        libraryManagementSystem.start();
+        verify(outputDriver).printListOfBooks(library.getBookDetails());
+    }
+
+    @DisplayName("test for invalid input option")
+    @Test
+    void testForValid(){
+        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(outputDriver, library, inputDriver);
+        when(inputDriver.getInputFromUserForSelectMenuOption()).thenReturn(5).thenReturn(0);
+        libraryManagementSystem.start();
+        verify(outputDriver).print(Messages.ASK_FOR_VALID_INPUT);
     }
 
 }
