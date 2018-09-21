@@ -14,7 +14,7 @@ public class InputDriver {
         return input;
     }
 
-    public String getInputBookNameForCheckout(){
+    public String getInputBookName(){
         String input = scanner.nextLine();
         return input;
     }

@@ -24,7 +24,7 @@ class InputDriverTest {
         setSystem("Book1");
 
         InputDriver inputDriver = new InputDriver();
-        assertEquals("Book1", inputDriver.getInputBookNameForCheckout());
+        assertEquals("Book1", inputDriver.getInputBookName());
     }
 
     private void setSystem(String string) {

@@ -9,8 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
-import java.util.Arrays;
-
 import static org.mockito.Mockito.*;
 
 
@@ -51,12 +49,11 @@ class MenuTest {
         library = mock(Library.class);
         menu = Menu.CHECKOUT;
 
-        when(inputDriver.getInputBookNameForCheckout()).thenReturn("book1");
+        when(inputDriver.getInputBookName()).thenReturn("book1");
         when(library.isContains(new Book(new Title("book1")))).thenReturn(true);
         menu.performAction(library, outputDriver, inputDriver);
         verify(library).checkoutBook(new Book(new Title("book1")));
         verify(outputDriver).print(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
-        when(library.isContains(new Book(new Title("book1")))).thenReturn(false);
     }
 
     @DisplayName("check perform action for unsuccessful checkout")
@@ -65,12 +62,37 @@ class MenuTest {
         library = mock(Library.class);
         menu = Menu.CHECKOUT;
 
-        when(inputDriver.getInputBookNameForCheckout()).thenReturn("book1");
+        when(inputDriver.getInputBookName()).thenReturn("book1");
         when(library.isContains(new Book(new Title("book1")))).thenReturn(false);
         menu.performAction(library, outputDriver, inputDriver);
         verify(library, times(0)).checkoutBook(new Book(new Title("book1")));
         verify(outputDriver).print(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
-        when(library.isContains(new Book(new Title("book1")))).thenReturn(false);
+    }
+
+    @DisplayName("check perform action for successful return")
+    @Test
+    void testPerformActionForSuccessfulReturn(){
+        library = mock(Library.class);
+        //Menu returnMenu = Menu.RETURN;
+        menu = Menu.RETURN;
+
+        when(inputDriver.getInputBookName()).thenReturn("book1");
+        when(library.hasChecked(new Book(new Title("book1")))).thenReturn(true);
+        menu.performAction(library, outputDriver, inputDriver);
+        verify(outputDriver).print(Messages.SUCCESSFULL_RETURN_MESSAGE);
+    }
+
+    @DisplayName("check perform action for unsuccessful return")
+    @Test
+    void testPerformActionForUnsuccessfulReturn(){
+        library = mock(Library.class);
+        //Menu returnMenu = Menu.RETURN;
+        menu = Menu.RETURN;
+
+        when(inputDriver.getInputBookName()).thenReturn("book1");
+        when(library.hasChecked(new Book(new Title("book1")))).thenReturn(false);
+        menu.performAction(library, outputDriver, inputDriver);
+        verify(outputDriver).print(Messages.UNSUCCESSFULL_RETURN_MESSAGE);
     }
 
 }

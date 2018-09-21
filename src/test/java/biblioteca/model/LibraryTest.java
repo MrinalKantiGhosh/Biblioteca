@@ -20,6 +20,7 @@ class LibraryTest {
     Book book1;
     Book book2;
     List<Book> books;
+    List<Book> checkedBooks;
     List<Title> expectedTitles;
     List<Author> expectedAuthors;
     List<Year> expectedYears;
@@ -36,8 +37,10 @@ class LibraryTest {
         book1 = new Book(title1, author1, year1);
         book2 = new Book(title2, author2, year2);
         books = new ArrayList<>();
+        checkedBooks = new ArrayList<>();
         books.add(book1);
         books.add(book2);
+        checkedBooks.add(book2);
         expectedTitles = Arrays.asList(title1, title2);
         expectedAuthors = Arrays.asList(author1, author2);
         expectedYears = Arrays.asList(year1, year2);
@@ -84,7 +87,21 @@ class LibraryTest {
 
     @DisplayName("should return true for that book which is present in books")
     @Test
-    void testShouldReturnTrueForThatBookWhichIsPresentInList(){
+    void testShouldReturnTrueForThatBookWhichIsPresentInCheckedoutList(){
         assertTrue(library.isContains(book1));
+    }
+
+    @DisplayName("should return false for that book which is not present in books")
+    @Test
+    void testShouldReturnFalseForThatBookWhichIsNotPresentInCheckedList(){
+        assertFalse(library.hasChecked(new Book(new Title("book3"))));
+    }
+
+    @DisplayName("should return true for that book which is present in books")
+    @Test
+    void testShouldReturnTrueForThatBookWhichIsPresentInList(){
+        assertFalse(library.hasChecked(book1));
+        library.checkoutBook(book1);
+        assertTrue(library.hasChecked(book1));
     }
 }

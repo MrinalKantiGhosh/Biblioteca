@@ -24,7 +24,7 @@ public enum Menu {
         @Override
         public void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver) {
             outputDriver.print(Messages.ASK_FOR_BOOK_NAME_TO_CHECKOUT);
-            String bookName = inputDriver.getInputBookNameForCheckout();
+            String bookName = inputDriver.getInputBookName();
             Book selectedBook = new Book(new Title(bookName));
 
             if (library.isContains(selectedBook)) {
@@ -32,6 +32,21 @@ public enum Menu {
                 outputDriver.print(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
             }else {
                 outputDriver.print(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
+            }
+        }
+    },
+    RETURN("Return Book"){
+        @Override
+        public void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver) {
+            outputDriver.print(Messages.ASK_FOR_BOOK_NAME_TO_RETURN);
+            String bookName = inputDriver.getInputBookName();
+            Book selectedBookForReturn = new Book(new Title(bookName));
+
+            if(library.hasChecked(selectedBookForReturn)){
+                library.returnBook(selectedBookForReturn);
+                outputDriver.print(Messages.SUCCESSFULL_RETURN_MESSAGE);
+            }else{
+                outputDriver.print(Messages.UNSUCCESSFULL_RETURN_MESSAGE);
             }
         }
     };

@@ -1,13 +1,15 @@
 package biblioteca.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Library {
     List<Book> books;
+    List<Book> checkoutListOfBooks;
+
     public Library(List<Book> books) {
         this.books = books;
+        checkoutListOfBooks = new ArrayList<>();
     }
 
     public List<Title> getTitleFromListOfBooks() {
@@ -48,10 +50,20 @@ public class Library {
     }
 
     public void checkoutBook(Book selectedBook){
-         books.remove(selectedBook);
+         int indexOfBook = books.indexOf(selectedBook);
+         checkoutListOfBooks.add(books.remove(indexOfBook));
+    }
+
+    public void returnBook(Book selectedBookForReturn){
+        int indexOfBook = checkoutListOfBooks.indexOf(selectedBookForReturn);
+        books.add(checkoutListOfBooks.remove(indexOfBook));
     }
 
     public boolean isContains(Book book){
         return books.contains(book);
+    }
+
+    public boolean hasChecked(Book book){
+        return checkoutListOfBooks.contains(book);
     }
 }
