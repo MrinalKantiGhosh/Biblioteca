@@ -35,7 +35,9 @@ class LibraryTest {
         Year year2 = new Year(2012);
         book1 = new Book(title1, author1, year1);
         book2 = new Book(title2, author2, year2);
-        books = Arrays.asList(book1, book2);
+        books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
         expectedTitles = Arrays.asList(title1, title2);
         expectedAuthors = Arrays.asList(author1, author2);
         expectedYears = Arrays.asList(year1, year2);
@@ -64,5 +66,25 @@ class LibraryTest {
         List<Year> resultListOfYears = library.getYearOfPublishFromListOfBooks();
 
         assertEquals(expectedYears, resultListOfYears);
+    }
+
+    @DisplayName("expected to be remove specific given book object from book list of library")
+    @Test
+    void testForCheckoutBookFromBookList(){
+        assertTrue(books.contains(book1));
+        library.checkoutBook(book1);
+        assertFalse(books.contains(book1));
+    }
+
+    @DisplayName("should return false for that book which is not present in books")
+    @Test
+    void testShouldReturnFalseForThatBookWhichIsNotPresentInList(){
+        assertFalse(library.isContains(new Book(new Title("book3"))));
+    }
+
+    @DisplayName("should return true for that book which is present in books")
+    @Test
+    void testShouldReturnTrueForThatBookWhichIsPresentInList(){
+        assertTrue(library.isContains(book1));
     }
 }

@@ -15,7 +15,13 @@ public class BookRepository {
         book4 = new Book(new Title("book4"), new Author("Author4"), new Year(2013));
     }
 
-    public Collection<Book> getBooks(){
-        return Arrays.asList(book1, book2, book3, book4);
+    public List<Book> getBooks(){
+        ArrayList<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
+        books.add(book4);
+
+        return books;
     }
 }

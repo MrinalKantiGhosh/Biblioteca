@@ -14,6 +14,10 @@ public class Book {
         this.year = year;
     }
 
+    public Book(Title title){
+        this(title, new Author(""), new Year(0));
+    }
+
     Title getTitle() {
         return title;
     }
@@ -26,13 +30,13 @@ public class Book {
         return year;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(title, book.title) &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(year, book.year);
+        return Objects.equals(title, book.title);
     }
 }

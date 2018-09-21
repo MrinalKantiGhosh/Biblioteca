@@ -5,9 +5,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class Library {
-    Collection<Book> books;
-
-    public Library(Collection<Book> books) {
+    List<Book> books;
+    public Library(List<Book> books) {
         this.books = books;
     }
 
@@ -46,5 +45,13 @@ public class Library {
         }
 
         return bookDetails;
+    }
+
+    public void checkoutBook(Book selectedBook){
+         books.remove(selectedBook);
+    }
+
+    public boolean isContains(Book book){
+        return books.contains(book);
     }
 }

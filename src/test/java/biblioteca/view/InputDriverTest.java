@@ -18,6 +18,15 @@ class InputDriverTest {
         assertEquals(3, inputDriver.getInputFromUserForSelectMenuOption());
     }
 
+    @DisplayName("Test input for getting book name to checkout")
+    @Test
+    void testInputForBookNameToCheckout(){
+        setSystem("Book1");
+
+        InputDriver inputDriver = new InputDriver();
+        assertEquals("Book1", inputDriver.getInputBookNameForCheckout());
+    }
+
     private void setSystem(String string) {
         System.setIn(new ByteArrayInputStream(string.getBytes()));
     }

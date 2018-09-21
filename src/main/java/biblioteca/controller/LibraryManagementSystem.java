@@ -5,9 +5,6 @@ import biblioteca.model.Library;
 import biblioteca.view.InputDriver;
 import biblioteca.view.OutputDriver;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 
 public class LibraryManagementSystem {
     private final OutputDriver outputDriver;
@@ -26,20 +23,20 @@ public class LibraryManagementSystem {
 
     public void start() {
         welcomeMessage();
-        displayMenuList();
+        menuOptions();
     }
 
     private boolean isValidInput(int input) {
         return input >= 0 && input < Menu.values().length;
     }
 
-    private void displayMenuList() {
+    private void menuOptions() {
         int getInputFromUser;
         do {
             printMenu();
             getInputFromUser = inputDriver.getInputFromUserForSelectMenuOption();
             if (isValidInput(getInputFromUser)) {
-                Menu.values()[getInputFromUser].performAction(library, outputDriver);
+                Menu.values()[getInputFromUser].performAction(library, outputDriver, inputDriver);
             } else {
                 outputDriver.print(Messages.ASK_FOR_VALID_INPUT);
             }

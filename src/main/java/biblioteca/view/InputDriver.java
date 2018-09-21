@@ -3,14 +3,19 @@ package biblioteca.view;
 import java.util.Scanner;
 
 public class InputDriver {
-    Scanner scanner;
+    private final Scanner scanner;
 
     public InputDriver() {
         this.scanner = new Scanner(System.in);
     }
 
     public int getInputFromUserForSelectMenuOption(){
-        int input = scanner.nextInt();
+        int input = Integer.parseInt(scanner.nextLine());
+        return input;
+    }
+
+    public String getInputBookNameForCheckout(){
+        String input = scanner.nextLine();
         return input;
     }
 }
