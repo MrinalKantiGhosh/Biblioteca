@@ -12,30 +12,6 @@ public class Library {
         checkoutListOfBooks = new ArrayList<>();
     }
 
-    public List<Title> getTitleFromListOfBooks() {
-        List<Title> titleList = new ArrayList<>();
-        for (Book book : books) {
-            titleList.add(book.getTitle());
-        }
-        return titleList;
-    }
-
-    public List<Author> getAuthorFromListOfBooks() {
-        List<Author> authorList = new ArrayList<>();
-        for (Book book : books) {
-            authorList.add(book.getAuthor());
-        }
-        return authorList;
-    }
-
-    public List<Year> getYearOfPublishFromListOfBooks() {
-        List<Year> yearList = new ArrayList<>();
-        for (Book book : books) {
-            yearList.add(book.getYear());
-        }
-        return yearList;
-    }
-
     public List<String> getBookDetails(){
         ArrayList<String> bookDetails = new ArrayList<>();
 

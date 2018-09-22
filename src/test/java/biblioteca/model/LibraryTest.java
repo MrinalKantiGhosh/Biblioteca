@@ -27,7 +27,7 @@ class LibraryTest {
     Library library;
 
     @BeforeEach
-    void init(){
+    void init() {
         title1 = new Title("book1");
         title2 = new Title("book2");
         Author author1 = new Author("author1");
@@ -47,33 +47,9 @@ class LibraryTest {
         library = new Library(books);
     }
 
-    @DisplayName("expected book titles given is as same as we get in list")
-    @Test
-    void testGetTitleList(){
-        List<Title> resultListOfTitle = library.getTitleFromListOfBooks();
-
-        assertEquals(expectedTitles, resultListOfTitle);
-    }
-
-    @DisplayName("expected book authors given is as same as we get in list")
-    @Test
-    void testGetAuthorList(){
-        List<Author> resultListOfAuthor = library.getAuthorFromListOfBooks();
-
-        assertEquals(expectedAuthors, resultListOfAuthor);
-    }
-
-    @DisplayName("expected year of publish given is as same as we get in list")
-    @Test
-    void testGetYearOfPublishList(){
-        List<Year> resultListOfYears = library.getYearOfPublishFromListOfBooks();
-
-        assertEquals(expectedYears, resultListOfYears);
-    }
-
     @DisplayName("expected to be remove specific given book object from book list of library")
     @Test
-    void testForCheckoutBookFromBookList(){
+    void testForCheckoutBookFromBookList() {
         assertTrue(books.contains(book1));
         library.checkoutBook(book1);
         assertFalse(books.contains(book1));
@@ -81,25 +57,25 @@ class LibraryTest {
 
     @DisplayName("should return false for that book which is not present in books")
     @Test
-    void testShouldReturnFalseForThatBookWhichIsNotPresentInList(){
+    void testShouldReturnFalseForThatBookWhichIsNotPresentInList() {
         assertFalse(library.isContains(new Book(new Title("book3"))));
     }
 
     @DisplayName("should return true for that book which is present in books")
     @Test
-    void testShouldReturnTrueForThatBookWhichIsPresentInCheckedoutList(){
+    void testShouldReturnTrueForThatBookWhichIsPresentInCheckedoutList() {
         assertTrue(library.isContains(book1));
     }
 
     @DisplayName("should return false for that book which is not present in books")
     @Test
-    void testShouldReturnFalseForThatBookWhichIsNotPresentInCheckedList(){
+    void testShouldReturnFalseForThatBookWhichIsNotPresentInCheckedList() {
         assertFalse(library.hasChecked(new Book(new Title("book3"))));
     }
 
     @DisplayName("should return true for that book which is present in books")
     @Test
-    void testShouldReturnTrueForThatBookWhichIsPresentInList(){
+    void testShouldReturnTrueForThatBookWhichIsPresentInList() {
         assertFalse(library.hasChecked(book1));
         library.checkoutBook(book1);
         assertTrue(library.hasChecked(book1));

@@ -28,7 +28,7 @@ class MenuTest {
         author = new Author("Author");
         yearOfPublish = new Year(2010);
         Book book = new Book(title, author, yearOfPublish);
-        //library = new Library(Arrays.asList(book));
+        Library library = mock(Library.class);
         outputDriver = mock(OutputDriver.class);
         inputDriver = mock(InputDriver.class);
     }
@@ -36,7 +36,6 @@ class MenuTest {
     @DisplayName("check perform action for List books")
     @Test
     void testPerformActionForListBook(){
-        library = mock(Library.class);
         menu = Menu.LIST_BOOKS;
         menu.performAction(library, outputDriver, inputDriver);
         verify(outputDriver).printListOfBooks(library.getBookDetails());
@@ -46,7 +45,6 @@ class MenuTest {
     @DisplayName("check perform action for successful checkout")
     @Test
     void testPerformActionForSuccessfulCheckout(){
-        library = mock(Library.class);
         menu = Menu.CHECKOUT;
 
         when(inputDriver.getInputBookName()).thenReturn("book1");
@@ -59,7 +57,6 @@ class MenuTest {
     @DisplayName("check perform action for unsuccessful checkout")
     @Test
     void testPerformActionForUnsuccessfulCheckout(){
-        library = mock(Library.class);
         menu = Menu.CHECKOUT;
 
         when(inputDriver.getInputBookName()).thenReturn("book1");
@@ -72,8 +69,6 @@ class MenuTest {
     @DisplayName("check perform action for successful return")
     @Test
     void testPerformActionForSuccessfulReturn(){
-        library = mock(Library.class);
-        //Menu returnMenu = Menu.RETURN;
         menu = Menu.RETURN;
 
         when(inputDriver.getInputBookName()).thenReturn("book1");
@@ -85,8 +80,6 @@ class MenuTest {
     @DisplayName("check perform action for unsuccessful return")
     @Test
     void testPerformActionForUnsuccessfulReturn(){
-        library = mock(Library.class);
-        //Menu returnMenu = Menu.RETURN;
         menu = Menu.RETURN;
 
         when(inputDriver.getInputBookName()).thenReturn("book1");

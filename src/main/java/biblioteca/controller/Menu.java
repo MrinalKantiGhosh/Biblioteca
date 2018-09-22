@@ -1,62 +1,30 @@
 package biblioteca.controller;
 
-import biblioteca.common.Messages;
-import biblioteca.model.Book;
+
 import biblioteca.model.Library;
-import biblioteca.model.Title;
 import biblioteca.view.InputDriver;
 import biblioteca.view.OutputDriver;
 
 public enum Menu {
-    QUIT("Quit") {
-        @Override
-        public void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver) {
-
-        }
+    QUIT("Quit", new Quit()) {
     },
-    LIST_BOOKS("List Books") {
-        @Override
-        public void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver) {
-            outputDriver.printListOfBooks(library.getBookDetails());
-        }
+    LIST_BOOKS("List Books", new ListBook()) {
     },
-    CHECKOUT("Checkout") {
-        @Override
-        public void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver) {
-            outputDriver.print(Messages.ASK_FOR_BOOK_NAME_TO_CHECKOUT);
-            String bookName = inputDriver.getInputBookName();
-            Book selectedBook = new Book(new Title(bookName));
-
-            if (library.isContains(selectedBook)) {
-                library.checkoutBook(selectedBook);
-                outputDriver.print(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
-            }else {
-                outputDriver.print(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
-            }
-        }
+    CHECKOUT("Checkout", new CheckoutBook()) {
     },
-    RETURN("Return Book"){
-        @Override
-        public void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver) {
-            outputDriver.print(Messages.ASK_FOR_BOOK_NAME_TO_RETURN);
-            String bookName = inputDriver.getInputBookName();
-            Book selectedBookForReturn = new Book(new Title(bookName));
-
-            if(library.hasChecked(selectedBookForReturn)){
-                library.returnBook(selectedBookForReturn);
-                outputDriver.print(Messages.SUCCESSFULL_RETURN_MESSAGE);
-            }else{
-                outputDriver.print(Messages.UNSUCCESSFULL_RETURN_MESSAGE);
-            }
-        }
+    RETURN("Return Book", new ReturnBook()){
     };
 
-    public abstract void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver);
+    void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver){
+        this.command.performCommand(library, outputDriver, inputDriver);
+    }
 
     private final String message;
+    private final Command command;
 
-    Menu(String message) {
+    Menu(String message, Command command) {
         this.message = "Enter " + ordinal() + " to " + message;
+        this.command = command;
     }
 
     public String getMessage() {
