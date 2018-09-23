@@ -1,6 +1,8 @@
 package biblioteca.controller;
 
 
+import biblioteca.controller.command.*;
+import biblioteca.model.ItemType;
 import biblioteca.model.Library;
 import biblioteca.view.InputDriver;
 import biblioteca.view.OutputDriver;
@@ -8,11 +10,17 @@ import biblioteca.view.OutputDriver;
 public enum Menu {
     QUIT("Quit", new Quit()) {
     },
-    LIST_BOOKS("List Books", new ListBook()) {
+    LIST_BOOKS("List Books", new ListItem(ItemType.BOOK)) {
     },
-    CHECKOUT("Checkout", new CheckoutBook()) {
+    CHECKOUT_BOOK("Checkout Book", new CheckoutItem(ItemType.BOOK)) {
     },
-    RETURN("Return Book", new ReturnBook()){
+    RETURN_BOOK("Return Book", new ReturnItem(ItemType.BOOK)){
+    },
+    LIST_MOVIE("List Movie", new ListItem(ItemType.MOVIE)) {
+    },
+    CHECKOUT_MOVIE("Checkout Movie", new CheckoutItem(ItemType.MOVIE)) {
+    },
+    RETURN_MOVIE("Return Movie", new ReturnItem(ItemType.MOVIE)){
     };
 
     void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver){
@@ -27,7 +35,7 @@ public enum Menu {
         this.command = command;
     }
 
-    public String getMessage() {
+    String getMessage() {
         return message;
     }
 }

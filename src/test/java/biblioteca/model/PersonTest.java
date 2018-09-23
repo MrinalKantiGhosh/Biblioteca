@@ -5,27 +5,27 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AuthorTest {
-    @DisplayName("expect AuthorTest as author")
+class PersonTest {
+    @DisplayName("expect PersonTest as author")
     @Test
     void testForGetAuthor(){
-        Author author = new Author("AuthorTest");
-        assertEquals("AuthorTest", author.getValue());
+        Person person = new Person("PersonTest");
+        assertEquals("PersonTest", person.getValue());
     }
 
     @DisplayName("return true for two same author object")
     @Test
     void returnTrueForTwoSameAuthorObject(){
-        Author author1 = new Author("Author1");
-        Author author2 = new Author("Author1");
-        assertEquals(author1, author2);
+        Person person1 = new Person("Author1");
+        Person person2 = new Person("Author1");
+        assertEquals(person1, person2);
     }
 
     @DisplayName("return not true for two different author object")
     @Test
     void returnTrueForTwoDifferentAuthorObject(){
-        Author author1 = new Author("Author1");
-        Author author2 = new Author("Author2");
-        assertNotEquals(author1, author2);
+        Person person1 = new Person("Author1");
+        Person person2 = new Person("Author2");
+        assertNotEquals(person1, person2);
     }
 }

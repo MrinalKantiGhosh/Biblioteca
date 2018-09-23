@@ -1,5 +1,6 @@
 package biblioteca.model;
 
+import biblioteca.common.Messages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,76 +9,61 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static biblioteca.common.Messages.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
-    Title title1;
-    Title title2;
-    Author author1;
-    Author author2;
-    Year year1;
-    Year year2;
-    Book book1;
-    Book book2;
-    List<Book> books;
-    List<Book> checkedBooks;
-    List<Title> expectedTitles;
-    List<Author> expectedAuthors;
-    List<Year> expectedYears;
-    Library library;
+    private Book book1;
+    private Book book2;
+    private Movie movie1;
+    private Movie movie2;
+    private List<LibraryItem> items;
+    private List<LibraryItem> checkedItems;
+    private Library library;
 
     @BeforeEach
     void init() {
-        title1 = new Title("book1");
-        title2 = new Title("book2");
-        Author author1 = new Author("author1");
-        Author author2 = new Author("author2");
-        Year year1 = new Year(2010);
-        Year year2 = new Year(2012);
-        book1 = new Book(title1, author1, year1);
-        book2 = new Book(title2, author2, year2);
-        books = new ArrayList<>();
-        checkedBooks = new ArrayList<>();
-        books.add(book1);
-        books.add(book2);
-        checkedBooks.add(book2);
-        expectedTitles = Arrays.asList(title1, title2);
-        expectedAuthors = Arrays.asList(author1, author2);
-        expectedYears = Arrays.asList(year1, year2);
-        library = new Library(books);
+        book1 = new Book(new Title("book1"));
+        book2 = new Book(new Title("book2"));
+        Movie movie1 = new Movie(new Title("movie1"));
+        Movie movie2 = new Movie(new Title("movie2"));
+        items = new ArrayList<>();
+        checkedItems = new ArrayList<>();
+        items.add(book1);
+        items.add(book2);
+        items.add(movie2);
+        library = new Library(items);
     }
 
-    @DisplayName("expected to be remove specific given book object from book list of library")
+    @DisplayName("expected to be remove specific given item object from list of library")
     @Test
-    void testForCheckoutBookFromBookList() {
-        assertTrue(books.contains(book1));
-        library.checkoutBook(book1);
-        assertFalse(books.contains(book1));
+    void testForCheckoutBookFromList() {
+        assertTrue(items.contains(book1));
+        assertEquals(SUCCESSFUL_CHECKOUT_MESSAGE, library.checkoutItem("book1", ItemType.BOOK));
     }
 
-    @DisplayName("should return false for that book which is not present in books")
+    @DisplayName("expected not to be remove specific given item object from list of library which is not present")
     @Test
-    void testShouldReturnFalseForThatBookWhichIsNotPresentInList() {
-        assertFalse(library.isContains(new Book(new Title("book3"))));
+    void falseForCheckoutBookFromList() {
+        assertFalse(items.contains(movie2));
+        assertEquals(UNSUCCESSFUL_CHECKOUT_MESSAGE, library.checkoutItem("movie1", ItemType.MOVIE));
     }
 
-    @DisplayName("should return true for that book which is present in books")
+    @DisplayName("expected to be return specific given item to the library")
     @Test
-    void testShouldReturnTrueForThatBookWhichIsPresentInCheckedoutList() {
-        assertTrue(library.isContains(book1));
+    void testForReturnBookTolibrary() {
+        assertTrue(items.contains(book2));
+        assertEquals(SUCCESSFUL_CHECKOUT_MESSAGE, library.checkoutItem("book2", ItemType.BOOK));
+        assertFalse(items.contains(book2));
+        assertEquals(SUCCESSFUL_RETURN_MESSAGE, library.returnItem("book2", ItemType.BOOK));
     }
 
-    @DisplayName("should return false for that book which is not present in books")
+    @DisplayName("expected not to be return specific given item to the library which is not valid")
     @Test
-    void testShouldReturnFalseForThatBookWhichIsNotPresentInCheckedList() {
-        assertFalse(library.hasChecked(new Book(new Title("book3"))));
+    void falseForReturnBookFromListWhichIsNotValid() {
+        assertFalse(items.contains(movie1));
+        assertEquals(UNSUCCESSFUL_RETURN_MESSAGE, library.returnItem("movie1", ItemType.MOVIE));
     }
 
-    @DisplayName("should return true for that book which is present in books")
-    @Test
-    void testShouldReturnTrueForThatBookWhichIsPresentInList() {
-        assertFalse(library.hasChecked(book1));
-        library.checkoutBook(book1);
-        assertTrue(library.hasChecked(book1));
-    }
+
 }

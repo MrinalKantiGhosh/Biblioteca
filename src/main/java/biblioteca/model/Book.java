@@ -1,42 +1,43 @@
 package biblioteca.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Book {
+public class Book implements LibraryItem{
     private final Title title;
-    private final Author author;
+    private final Person author;
     private final Year year;
+    ItemType type;
 
 
-    public Book(Title title, Author author, Year year) {
+    public Book(Title title, Person author, Year year) {
         this.title = title;
         this.author = author;
         this.year = year;
+        this.type = ItemType.BOOK;
     }
 
     public Book(Title title){
-        this(title, new Author(""), new Year(0));
+        this(title, new Person(""), new Year(0));
     }
 
-    Title getTitle() {
-        return title;
+    @Override
+    public ItemType getItemType() {
+        return this.type;
     }
 
-    Author getAuthor() {
-        return author;
+    @Override
+    public String getItemDetail() {
+        return this.title.getValue() + "," + this.author.getValue() + "," + this.year.getValue();
     }
-
-    Year getYear() {
-        return year;
-    }
-
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(title, book.title);
+        return Objects.equals(title, book.title) &&
+                type == book.type;
     }
 }

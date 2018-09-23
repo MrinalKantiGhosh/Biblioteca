@@ -11,14 +11,14 @@ public class LibraryManagementSystem {
     private final Library library;
     private final InputDriver inputDriver;
 
-    public LibraryManagementSystem(OutputDriver outputDriver, Library library, InputDriver inputDriver) {
+    public LibraryManagementSystem(Library library, OutputDriver outputDriver, InputDriver inputDriver) {
         this.outputDriver = outputDriver;
         this.library = library;
         this.inputDriver = inputDriver;
     }
 
     private void welcomeMessage() {
-        outputDriver.print(Messages.WELCOME_MESSAGE);
+        outputDriver.println(Messages.WELCOME_MESSAGE);
     }
 
     public void start() {
@@ -33,21 +33,22 @@ public class LibraryManagementSystem {
     private void menuOptions() {
         int getInputFromUser;
         do {
-            printMenu();
+            printlnMenu();
             getInputFromUser = inputDriver.getInputFromUserForSelectMenuOption();
             if (isValidInput(getInputFromUser)) {
                 Menu.values()[getInputFromUser].performAction(library, outputDriver, inputDriver);
             } else {
-                outputDriver.print(Messages.ASK_FOR_VALID_INPUT);
+                outputDriver.println(Messages.ASK_FOR_VALID_INPUT);
             }
         } while (getInputFromUser != Menu.QUIT.ordinal());
     }
 
-    private void printMenu() {
+    private void printlnMenu() {
+        outputDriver.println(Messages.DIFFERENTIATOR);
         for(int itr = 0; itr < Menu.values().length; itr++){
-            outputDriver.print(Menu.values()[itr].getMessage());
+            outputDriver.println(Menu.values()[itr].getMessage());
         }
-        outputDriver.print(Messages.ASK_FOR_INPUT_FROM_THE_USER);
+        outputDriver.println(Messages.ASK_FOR_INPUT_FROM_THE_USER);
     }
 
 }

@@ -9,7 +9,7 @@ public class Title {
         this.title = title;
     }
 
-    public String getValue(){
+    String getValue(){
         return title;
     }
 

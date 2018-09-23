@@ -1,4 +1,4 @@
-package biblioteca.controller;
+package biblioteca.controller.command;
 
 import biblioteca.model.Library;
 import biblioteca.view.InputDriver;

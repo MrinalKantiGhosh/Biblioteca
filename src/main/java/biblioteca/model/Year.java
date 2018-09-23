@@ -7,7 +7,7 @@ public class Year {
         this.yearOfPublish = yearOfPublish;
     }
 
-    public int getValue(){
+    int getValue(){
         return yearOfPublish;
     }
 

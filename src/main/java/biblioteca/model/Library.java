@@ -1,45 +1,56 @@
 package biblioteca.model;
 
+import biblioteca.common.Messages;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Library {
-    List<Book> books;
-    List<Book> checkoutListOfBooks;
+    List<LibraryItem> items;
+    List<LibraryItem> checkoutListOfItems;
 
-    public Library(List<Book> books) {
-        this.books = books;
-        checkoutListOfBooks = new ArrayList<>();
+    public Library(List<LibraryItem> items) {
+        this.items = items;
+        checkoutListOfItems = new ArrayList<>();
     }
 
-    public List<String> getBookDetails(){
-        ArrayList<String> bookDetails = new ArrayList<>();
+    public List<String> getLibraryItemDetails(ItemType type) {
+        return items.stream()
+                .filter(libraryItem -> libraryItem.getItemType() == type)
+                .map(LibraryItem::getItemDetail)
+                .collect(Collectors.toList());
+    }
 
-        for(Book book : books){
-            String individualBookDetail = book.getTitle().getValue()
-                    + "\t\t" + book.getAuthor().getValue() + "\t\t"
-                    + book.getYear().getValue();
-            bookDetails.add(individualBookDetail);
+    private boolean isContains(LibraryItem item) {
+        return items.contains(item);
+    }
+
+    public boolean hasChecked(LibraryItem item) {
+        return checkoutListOfItems.contains(item);
+    }
+
+    public String checkoutItem(String title, ItemType type) {
+        LibraryItem selectedItemForCheckout = type.createItemForTitle(title);
+
+        if (!isContains(selectedItemForCheckout)) {
+            return Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE;
         }
+        int indexOfItem = items.indexOf(selectedItemForCheckout);
+        checkoutListOfItems.add(items.remove(indexOfItem));
+        return Messages.SUCCESSFUL_CHECKOUT_MESSAGE;
 
-        return bookDetails;
     }
 
-    public void checkoutBook(Book selectedBook){
-         int indexOfBook = books.indexOf(selectedBook);
-         checkoutListOfBooks.add(books.remove(indexOfBook));
-    }
+    public String returnItem(String title, ItemType type){
+        LibraryItem selectedItemForReturn = type.createItemForTitle(title);
 
-    public void returnBook(Book selectedBookForReturn){
-        int indexOfBook = checkoutListOfBooks.indexOf(selectedBookForReturn);
-        books.add(checkoutListOfBooks.remove(indexOfBook));
-    }
-
-    public boolean isContains(Book book){
-        return books.contains(book);
-    }
-
-    public boolean hasChecked(Book book){
-        return checkoutListOfBooks.contains(book);
+        if(!hasChecked(selectedItemForReturn)){
+            return Messages.UNSUCCESSFUL_RETURN_MESSAGE;
+        }
+        int indexOfItem = checkoutListOfItems.indexOf(selectedItemForReturn);
+        items.add(checkoutListOfItems.remove(indexOfItem));
+        return Messages.SUCCESSFUL_RETURN_MESSAGE;
     }
 }
