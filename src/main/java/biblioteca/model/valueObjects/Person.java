@@ -1,4 +1,4 @@
-package biblioteca.model;
+package biblioteca.model.valueObjects;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ public class Person {
         this.authorName = authorName;
     }
 
-    String getValue(){
+    public String getValue(){
         return authorName;
     }
 

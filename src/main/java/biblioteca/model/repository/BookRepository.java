@@ -1,4 +1,10 @@
-package biblioteca.model;
+package biblioteca.model.repository;
+
+import biblioteca.model.libraryItems.Book;
+import biblioteca.model.libraryItems.LibraryItem;
+import biblioteca.model.valueObjects.Person;
+import biblioteca.model.valueObjects.Title;
+import biblioteca.model.valueObjects.Year;
 
 import java.util.*;
 

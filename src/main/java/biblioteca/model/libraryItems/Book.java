@@ -1,10 +1,12 @@
-package biblioteca.model;
+package biblioteca.model.libraryItems;
 
-import java.util.ArrayList;
-import java.util.List;
+import biblioteca.model.valueObjects.Person;
+import biblioteca.model.valueObjects.Title;
+import biblioteca.model.valueObjects.Year;
+
 import java.util.Objects;
 
-public class Book implements LibraryItem{
+public class Book implements LibraryItem {
     private final Title title;
     private final Person author;
     private final Year year;

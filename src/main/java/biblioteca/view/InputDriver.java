@@ -9,12 +9,12 @@ public class InputDriver {
         this.scanner = new Scanner(System.in);
     }
 
-    public int getInputFromUserForSelectMenuOption(){
+    public int getInputInteger(){
         int input = Integer.parseInt(scanner.nextLine());
         return input;
     }
 
-    public String getInputItemName(){
+    public String getInputString(){
         String input = scanner.nextLine();
         return input;
     }

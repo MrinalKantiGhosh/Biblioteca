@@ -1,4 +1,9 @@
-package biblioteca.model;
+package biblioteca.model.libraryItems;
+
+import biblioteca.model.libraryItems.Book;
+import biblioteca.model.libraryItems.LibraryItem;
+import biblioteca.model.libraryItems.Movie;
+import biblioteca.model.valueObjects.Title;
 
 public enum ItemType {
     BOOK{

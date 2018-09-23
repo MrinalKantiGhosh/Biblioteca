@@ -1,6 +1,4 @@
-package biblioteca.model;
-
-import java.util.List;
+package biblioteca.model.libraryItems;
 
 public interface LibraryItem {
     ItemType getItemType();

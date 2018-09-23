@@ -1,8 +1,13 @@
-package biblioteca.model;
+package biblioteca.model.libraryItems;
+
+import biblioteca.model.valueObjects.Person;
+import biblioteca.model.valueObjects.Rating;
+import biblioteca.model.valueObjects.Title;
+import biblioteca.model.valueObjects.Year;
 
 import java.util.Objects;
 
-public class Movie implements LibraryItem{
+public class Movie implements LibraryItem {
     private final Title title;
     private final Person director;
     private final Year year;

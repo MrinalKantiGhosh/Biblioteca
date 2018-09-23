@@ -15,7 +15,7 @@ class InputDriverTest {
         setSystem("3\n");
 
         InputDriver inputDriver = new InputDriver();
-        assertEquals(3, inputDriver.getInputFromUserForSelectMenuOption());
+        assertEquals(3, inputDriver.getInputInteger());
     }
 
     @DisplayName("Test input for getting book name to checkout")
@@ -24,7 +24,7 @@ class InputDriverTest {
         setSystem("Book1");
 
         InputDriver inputDriver = new InputDriver();
-        assertEquals("Book1", inputDriver.getInputItemName());
+        assertEquals("Book1", inputDriver.getInputString());
     }
 
     private void setSystem(String string) {

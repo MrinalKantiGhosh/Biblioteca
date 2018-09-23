@@ -1,5 +1,6 @@
 package biblioteca.model;
 
+import biblioteca.model.valueObjects.Rating;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

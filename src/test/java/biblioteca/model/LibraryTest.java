@@ -1,12 +1,15 @@
 package biblioteca.model;
 
-import biblioteca.common.Messages;
+import biblioteca.model.libraryItems.Book;
+import biblioteca.model.libraryItems.ItemType;
+import biblioteca.model.libraryItems.LibraryItem;
+import biblioteca.model.libraryItems.Movie;
+import biblioteca.model.valueObjects.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static biblioteca.common.Messages.*;

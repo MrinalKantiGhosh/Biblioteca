@@ -1,4 +1,11 @@
-package biblioteca.model;
+package biblioteca.model.repository;
+
+import biblioteca.model.libraryItems.LibraryItem;
+import biblioteca.model.libraryItems.Movie;
+import biblioteca.model.valueObjects.Person;
+import biblioteca.model.valueObjects.Rating;
+import biblioteca.model.valueObjects.Title;
+import biblioteca.model.valueObjects.Year;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +24,12 @@ public class MovieRepository {
     }
 
     public List<LibraryItem> getMovies(){
-        ArrayList<LibraryItem> Movies = new ArrayList<>();
-        Movies.add(Movie1);
-        Movies.add(Movie2);
-        Movies.add(Movie3);
-        Movies.add(Movie4);
+        ArrayList<LibraryItem> movies = new ArrayList<>();
+        movies.add(Movie1);
+        movies.add(Movie2);
+        movies.add(Movie3);
+        movies.add(Movie4);
 
-        return Movies;
+        return movies;
     }
 }

@@ -1,7 +1,5 @@
 package biblioteca.view;
 
-import biblioteca.model.Book;
-
 import java.util.List;
 
 public class OutputDriver {

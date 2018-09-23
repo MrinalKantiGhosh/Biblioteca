@@ -1,6 +1,7 @@
 package biblioteca.controller;
 
 import biblioteca.common.Messages;
+import biblioteca.model.AuthorizedUsers;
 import biblioteca.model.Library;
 import biblioteca.view.InputDriver;
 import biblioteca.view.OutputDriver;
@@ -10,11 +11,13 @@ public class LibraryManagementSystem {
     private final OutputDriver outputDriver;
     private final Library library;
     private final InputDriver inputDriver;
+    private final AuthorizedUsers authorizedUsers;
 
-    public LibraryManagementSystem(Library library, OutputDriver outputDriver, InputDriver inputDriver) {
+    public LibraryManagementSystem(Library library, OutputDriver outputDriver, InputDriver inputDriver, AuthorizedUsers authorizedUsers) {
         this.outputDriver = outputDriver;
         this.library = library;
         this.inputDriver = inputDriver;
+        this.authorizedUsers = authorizedUsers;
     }
 
     private void welcomeMessage() {
@@ -34,9 +37,9 @@ public class LibraryManagementSystem {
         int getInputFromUser;
         do {
             printlnMenu();
-            getInputFromUser = inputDriver.getInputFromUserForSelectMenuOption();
+            getInputFromUser = inputDriver.getInputInteger();
             if (isValidInput(getInputFromUser)) {
-                Menu.values()[getInputFromUser].performAction(library, outputDriver, inputDriver);
+                Menu.values()[getInputFromUser].performAction(library, outputDriver, inputDriver, authorizedUsers);
             } else {
                 outputDriver.println(Messages.ASK_FOR_VALID_INPUT);
             }

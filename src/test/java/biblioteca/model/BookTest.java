@@ -1,5 +1,9 @@
 package biblioteca.model;
 
+import biblioteca.model.libraryItems.Book;
+import biblioteca.model.valueObjects.Person;
+import biblioteca.model.valueObjects.Title;
+import biblioteca.model.valueObjects.Year;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

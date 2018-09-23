@@ -3,28 +3,38 @@ package biblioteca.controller;
 import biblioteca.common.Messages;
 import biblioteca.controller.command.CheckoutItem;
 import biblioteca.model.*;
+import biblioteca.model.libraryItems.ItemType;
+import biblioteca.model.repository.UserRepository;
 import biblioteca.view.InputDriver;
 import biblioteca.view.OutputDriver;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
-import org.mockito.Mockito;
 
 import static org.mockito.Mockito.*;
 
 class CheckoutItemTest {
+    Library library;
+    InputDriver inputDriver;
+    OutputDriver outputDriver;
+    AuthorizedUsers authorizedUsers;
+
+    @BeforeEach
+    void init(){
+        authorizedUsers = new AuthorizedUsers(new UserRepository().getUsers());
+        library = mock(Library.class);
+        outputDriver = mock(OutputDriver.class);
+        inputDriver = mock(InputDriver.class);
+    }
 
     @DisplayName("check performCommand for successful checkout of book")
     @Test
     void testForPerformActionForSuccessfulCheckoutOfBook() {
-        Library library = mock(Library.class);
-        OutputDriver outputDriver = mock(OutputDriver.class);
-        InputDriver inputDriver = mock(InputDriver.class);
         CheckoutItem checkoutItem = new CheckoutItem(ItemType.BOOK);
 
-        when(inputDriver.getInputItemName()).thenReturn("book1");
+        when(inputDriver.getInputString()).thenReturn("book1");
         when(library.checkoutItem("book1", ItemType.BOOK)).thenReturn(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
-        checkoutItem.performCommand(library, outputDriver, inputDriver);
+        checkoutItem.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
         verify(outputDriver).println(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
     }
@@ -37,9 +47,9 @@ class CheckoutItemTest {
         InputDriver inputDriver = mock(InputDriver.class);
         CheckoutItem checkoutItem = new CheckoutItem(ItemType.BOOK);
 
-        when(inputDriver.getInputItemName()).thenReturn("book1");
+        when(inputDriver.getInputString()).thenReturn("book1");
         when(library.checkoutItem("book1", ItemType.BOOK)).thenReturn(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
-        checkoutItem.performCommand(library, outputDriver, inputDriver);
+        checkoutItem.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
         verify(outputDriver).println(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
     }
@@ -52,9 +62,9 @@ class CheckoutItemTest {
         InputDriver inputDriver = mock(InputDriver.class);
         CheckoutItem checkoutItem = new CheckoutItem(ItemType.MOVIE);
 
-        when(inputDriver.getInputItemName()).thenReturn("movie1");
+        when(inputDriver.getInputString()).thenReturn("movie1");
         when(library.checkoutItem("movie1", ItemType.MOVIE)).thenReturn(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
-        checkoutItem.performCommand(library, outputDriver, inputDriver);
+        checkoutItem.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
         verify(outputDriver).println(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
     }
@@ -67,9 +77,9 @@ class CheckoutItemTest {
         InputDriver inputDriver = mock(InputDriver.class);
         CheckoutItem checkoutItem = new CheckoutItem(ItemType.MOVIE);
 
-        when(inputDriver.getInputItemName()).thenReturn("movie1");
+        when(inputDriver.getInputString()).thenReturn("movie1");
         when(library.checkoutItem("movie1", ItemType.MOVIE)).thenReturn(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
-        checkoutItem.performCommand(library, outputDriver, inputDriver);
+        checkoutItem.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
         verify(outputDriver).println(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
     }

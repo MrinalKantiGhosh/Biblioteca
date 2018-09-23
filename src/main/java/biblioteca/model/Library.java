@@ -1,15 +1,16 @@
 package biblioteca.model;
 
 import biblioteca.common.Messages;
+import biblioteca.model.libraryItems.ItemType;
+import biblioteca.model.libraryItems.LibraryItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Library {
-    List<LibraryItem> items;
-    List<LibraryItem> checkoutListOfItems;
+    private List<LibraryItem> items;
+    private List<LibraryItem> checkoutListOfItems;
 
     public Library(List<LibraryItem> items) {
         this.items = items;

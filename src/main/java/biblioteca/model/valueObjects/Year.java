@@ -1,4 +1,4 @@
-package biblioteca.model;
+package biblioteca.model.valueObjects;
 
 public class Year {
     private final int yearOfPublish;
@@ -7,7 +7,7 @@ public class Year {
         this.yearOfPublish = yearOfPublish;
     }
 
-    int getValue(){
+    public int getValue(){
         return yearOfPublish;
     }
 

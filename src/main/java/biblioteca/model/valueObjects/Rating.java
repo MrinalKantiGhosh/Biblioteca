@@ -1,4 +1,4 @@
-package biblioteca.model;
+package biblioteca.model.valueObjects;
 
 public class Rating {
     private final int rating;
@@ -7,7 +7,7 @@ public class Rating {
         this.rating = rating;
     }
 
-    int getValue(){
+    public int getValue(){
         return rating;
     }
 }
