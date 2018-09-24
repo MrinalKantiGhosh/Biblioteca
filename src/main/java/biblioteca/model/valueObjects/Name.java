@@ -2,10 +2,10 @@ package biblioteca.model.valueObjects;
 
 import java.util.Objects;
 
-public class Title {
+public class Name {
     private final String title;
 
-    public Title(String title) {
+    public Name(String title) {
         this.title = title;
     }
 
@@ -17,7 +17,7 @@ public class Title {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Title title1 = (Title) o;
-        return Objects.equals(title, title1.title);
+        Name name1 = (Name) o;
+        return Objects.equals(title, name1.title);
     }
 }

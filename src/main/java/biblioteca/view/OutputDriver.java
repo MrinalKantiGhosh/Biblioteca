@@ -24,6 +24,15 @@ public class OutputDriver {
         }
     }
 
+    public void printUserDetails(String details){
+        String detailOfIndividualBook[] = details.split(",");
+        for(String detail : detailOfIndividualBook){
+            String line = padLeft(detail);
+            print(line);
+        }
+        println("\n");
+    }
+
     public static String padRight(String string) {
         return String.format("%1$40s", string);
     }

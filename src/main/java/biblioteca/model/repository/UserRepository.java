@@ -1,8 +1,7 @@
 package biblioteca.model.repository;
 
 import biblioteca.model.User;
-import biblioteca.model.valueObjects.Password;
-import biblioteca.model.valueObjects.UserId;
+import biblioteca.model.valueObjects.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +13,10 @@ public class UserRepository {
     User user4;
 
     public UserRepository() {
-        this.user1 = new User(new UserId("abc-1234"), new Password("abc"));
-        this.user2 = new User(new UserId("def-5678"), new Password("def"));
-        this.user3 = new User(new UserId("ghi-9012"), new Password("ghi"));
-        this.user4 = new User(new UserId("jkl-3456"), new Password("jkl"));
+        this.user1 = new User(new UserId("abc-1234"), new Password("abc"), new Name("user1"), new Email("abc@gmail.com"), new PhoneNumber("1234567890"));
+        this.user2 = new User(new UserId("def-5678"), new Password("def"), new Name("user2"), new Email("def@gmail.com"), new PhoneNumber("1234567890"));
+        this.user3 = new User(new UserId("ghi-9012"), new Password("ghi"), new Name("user3"), new Email("ghi@gmail.com"), new PhoneNumber("1234567890"));
+        this.user4 = new User(new UserId("jkl-3456"), new Password("jkl"), new Name("user4"), new Email("jkl@gmail.com"), new PhoneNumber("1234567890"));
     }
 
     public List<User> getUsers(){

@@ -1,27 +1,27 @@
 package biblioteca.model.libraryItems;
 
 import biblioteca.model.valueObjects.Person;
-import biblioteca.model.valueObjects.Title;
+import biblioteca.model.valueObjects.Name;
 import biblioteca.model.valueObjects.Year;
 
 import java.util.Objects;
 
 public class Book implements LibraryItem {
-    private final Title title;
+    private final Name name;
     private final Person author;
     private final Year year;
     ItemType type;
 
 
-    public Book(Title title, Person author, Year year) {
-        this.title = title;
+    public Book(Name name, Person author, Year year) {
+        this.name = name;
         this.author = author;
         this.year = year;
         this.type = ItemType.BOOK;
     }
 
-    public Book(Title title){
-        this(title, new Person(""), new Year(0));
+    public Book(Name name){
+        this(name, new Person(""), new Year(0));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Book implements LibraryItem {
 
     @Override
     public String getItemDetail() {
-        return this.title.getValue() + "," + this.author.getValue() + "," + this.year.getValue();
+        return this.name.getValue() + "," + this.author.getValue() + "," + this.year.getValue();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Book implements LibraryItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(title, book.title) &&
+        return Objects.equals(name, book.name) &&
                 type == book.type;
     }
 }

@@ -1,8 +1,7 @@
 package biblioteca.model;
 
 import biblioteca.model.libraryItems.LibraryItem;
-import biblioteca.model.valueObjects.Password;
-import biblioteca.model.valueObjects.UserId;
+import biblioteca.model.valueObjects.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +10,26 @@ import java.util.Objects;
 public class User {
     private final UserId userId;
     private final Password password;
+    private final Name name;
+    private final Email email;
+    private final PhoneNumber phoneNumber;
     private final List<LibraryItem> checkoutList;
 
-    public User(UserId userId, Password password) {
+    public User(UserId userId, Password password, Name name, Email email, PhoneNumber phoneNumber) {
         this.userId = userId;
         this.password = password;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.checkoutList = new ArrayList<>();
+    }
+
+    public User(UserId userId, Password password) {
+        this(userId, password, new Name(""), new Email(""), new PhoneNumber(""));
+    }
+
+    public String getUserDetails(){
+        return this.name.getValue() + "," + this.email.getValue() + "," + this.phoneNumber.getValue();
     }
 
     public void checkoutItem(LibraryItem item) {

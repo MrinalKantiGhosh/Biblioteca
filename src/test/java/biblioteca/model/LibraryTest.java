@@ -5,7 +5,7 @@ import biblioteca.model.libraryItems.ItemType;
 import biblioteca.model.libraryItems.LibraryItem;
 import biblioteca.model.libraryItems.Movie;
 import biblioteca.model.valueObjects.Password;
-import biblioteca.model.valueObjects.Title;
+import biblioteca.model.valueObjects.Name;
 import biblioteca.model.valueObjects.UserId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,10 +29,10 @@ class LibraryTest {
 
     @BeforeEach
     void init() {
-        book1 = new Book(new Title("book1"));
-        book2 = new Book(new Title("book2"));
-        Movie movie1 = new Movie(new Title("movie1"));
-        Movie movie2 = new Movie(new Title("movie2"));
+        book1 = new Book(new Name("book1"));
+        book2 = new Book(new Name("book2"));
+        Movie movie1 = new Movie(new Name("movie1"));
+        Movie movie2 = new Movie(new Name("movie2"));
         items = new ArrayList<>();
         checkedItems = new ArrayList<>();
         items.add(book1);

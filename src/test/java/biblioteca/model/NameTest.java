@@ -1,35 +1,35 @@
 package biblioteca.model;
 
-import biblioteca.model.valueObjects.Title;
+import biblioteca.model.valueObjects.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TitleTest {
+class NameTest {
     @DisplayName("expect BookTest as title of book1")
     @Test
     void testGetTitle(){
-        Title title = new Title("BookTest");
+        Name name = new Name("BookTest");
 
-        assertEquals("BookTest", title.getValue());
+        assertEquals("BookTest", name.getValue());
     }
 
     @DisplayName("return true for two same title object")
     @Test
     void returnTrueForTwoSameTitleObject(){
-        Title title1 = new Title("Book1");
-        Title title2 = new Title("Book1");
+        Name name1 = new Name("Book1");
+        Name name2 = new Name("Book1");
 
-        assertEquals(title1, title2);
+        assertEquals(name1, name2);
     }
 
     @DisplayName("return not true for two different title object")
     @Test
     void returnTrueForTwoDifferentTitleObject(){
-        Title title1 = new Title("Book1");
-        Title title2 = new Title("Book2");
+        Name name1 = new Name("Book1");
+        Name name2 = new Name("Book2");
 
-        assertNotEquals(title1, title2);
+        assertNotEquals(name1, name2);
     }
 }

@@ -15,8 +15,8 @@ class UserTest {
     @BeforeEach
     void init(){
         user = new User(new UserId("abc-1234"), new Password("abcd"));
-        book1 = new Book(new Title("book1"), new Person("Author"), new Year(2010));
-        book2 = new Book(new Title("book2"), new Person("Author"), new Year(2010));
+        book1 = new Book(new Name("book1"), new Person("Author"), new Year(2010));
+        book2 = new Book(new Name("book2"), new Person("Author"), new Year(2010));
     }
 
     @DisplayName("return true after successful return of a libraryItem")
@@ -31,5 +31,14 @@ class UserTest {
     void returnFalseForUnsuccessfulReturn(){
         user.checkoutItem(book1);
         assertNotEquals(book2, user.returnItem(book1));
+    }
+
+    @DisplayName("check user details")
+    @Test
+    void checkUserDetails(){
+        User user = new User(new UserId("abc-1234"), new Password("abc"), new Name("user"), new Email("email"), new PhoneNumber("1234567890"));
+        String expected = "user,email,1234567890";
+
+        assertEquals(expected, user.getUserDetails());
     }
 }

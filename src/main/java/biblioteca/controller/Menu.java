@@ -26,7 +26,8 @@ public enum Menu {
     LOGIN("Log In", new LogIn()){
     },
     LOGOUT("Log Out", new LogOut()){
-    };
+    },
+    USERDETAILS("User Details", new AuthorizedCommand(new UserDetails()));
 
     void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver, AuthorizedUsers authorizedUsers){
         this.command.performCommand(library, outputDriver, inputDriver, authorizedUsers);
