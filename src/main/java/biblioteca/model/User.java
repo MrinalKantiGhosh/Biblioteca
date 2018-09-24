@@ -11,20 +11,25 @@ import java.util.Objects;
 public class User {
     private final UserId userId;
     private final Password password;
-    private final List<LibraryItem> checkList;
+    private final List<LibraryItem> checkoutList;
 
     public User(UserId userId, Password password) {
         this.userId = userId;
         this.password = password;
-        this.checkList = new ArrayList<>();
+        this.checkoutList = new ArrayList<>();
     }
 
     public void checkoutItem(LibraryItem item) {
-        checkList.add(item);
+        checkoutList.add(item);
     }
 
-    public boolean returnItem(LibraryItem item) {
-        return checkList.remove(item);
+    public LibraryItem returnItem(LibraryItem item) {
+        int indexOfItem = checkoutList.indexOf(item);
+        return checkoutList.remove(indexOfItem);
+    }
+
+    public boolean contains(LibraryItem item) {
+        return checkoutList.contains(item);
     }
 
     @Override

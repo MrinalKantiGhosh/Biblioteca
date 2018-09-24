@@ -1,4 +1,4 @@
-package biblioteca.controller;
+package biblioteca.controller.command;
 
 import biblioteca.controller.command.ListItem;
 import biblioteca.model.AuthorizedUsers;

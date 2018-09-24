@@ -18,5 +18,6 @@ public class Messages {
     public static final String NOT_A_VALID_USER = "Not a valid user !";
     public static final String ALREADY_LOGGED_IN = "You are already logged in !";
     public static final String SUCCESSFUL_LOG_IN = "You are successfully logged in !!";
+    public static final String SUCCESSFUL_LOG_OUT = "You are successfully logged out !!";
     public static final String NOT_LOGGED_IN_YET = "You are not logged in the system !";
 }

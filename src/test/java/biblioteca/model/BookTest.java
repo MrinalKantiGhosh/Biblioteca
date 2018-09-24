@@ -32,14 +32,14 @@ class BookTest {
         book2 = new Book(title2, person2, year2);
     }
 
-    @DisplayName("should return true for two same book object")
+    @DisplayName("should return true for two same book1 object")
     @Test
     void returnTrueForSameBookObject(){
         Book newBook = new Book(title1, person1, year1);
         assertEquals(newBook, book1);
     }
 
-    @DisplayName("should not return true for two different book object")
+    @DisplayName("should not return true for two different book1 object")
     @Test
     void returnFalseForDifferentBookObject(){
         assertNotEquals(book2, book1);

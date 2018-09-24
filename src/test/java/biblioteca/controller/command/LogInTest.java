@@ -40,7 +40,7 @@ class LogInTest {
 
     @DisplayName("expect Not a valid user")
     @Test
-    void checkUnvalidUser(){
+    void checkInvalidUser(){
         LogIn logIn = new LogIn();
         when(authorizedUsers.isLoggedIn()).thenReturn(false);
         when(authorizedUsers.isValidUser(user)).thenReturn(false);
@@ -48,15 +48,4 @@ class LogInTest {
         verify(outputDriver).println(NOT_A_VALID_USER);
 
     }
-
-    /*@DisplayName("expect successful log in")
-    @Test
-    void checkSuccessfulLogIn(){
-        LogIn logIn = new LogIn();
-        when(authorizedUsers.isLoggedIn()).thenReturn(false);
-        when(authorizedUsers.isValidUser(user)).thenReturn(true);
-        logIn.performCommand(library, outputDriver, inputDriver, authorizedUsers);
-        verify(outputDriver).println(SUCCESSFUL_LOG_IN);
-
-    }*/
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TitleTest {
-    @DisplayName("expect BookTest as title of book")
+    @DisplayName("expect BookTest as title of book1")
     @Test
     void testGetTitle(){
         Title title = new Title("BookTest");

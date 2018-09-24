@@ -4,17 +4,14 @@ import biblioteca.common.Messages;
 import biblioteca.model.libraryItems.ItemType;
 import biblioteca.model.libraryItems.LibraryItem;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Library {
     private List<LibraryItem> items;
-    private List<LibraryItem> checkoutListOfItems;
 
     public Library(List<LibraryItem> items) {
         this.items = items;
-        checkoutListOfItems = new ArrayList<>();
     }
 
     public List<String> getLibraryItemDetails(ItemType type) {
@@ -28,30 +25,29 @@ public class Library {
         return items.contains(item);
     }
 
-    public boolean hasChecked(LibraryItem item) {
-        return checkoutListOfItems.contains(item);
+    private boolean hasChecked(LibraryItem item, User user) {
+        return user.contains(item);
     }
 
-    public String checkoutItem(String title, ItemType type) {
+    public String checkoutItem(String title, User user, ItemType type) {
         LibraryItem selectedItemForCheckout = type.createItemForTitle(title);
 
         if (!isContains(selectedItemForCheckout)) {
             return Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE;
         }
         int indexOfItem = items.indexOf(selectedItemForCheckout);
-        checkoutListOfItems.add(items.remove(indexOfItem));
+        user.checkoutItem(items.remove(indexOfItem));
         return Messages.SUCCESSFUL_CHECKOUT_MESSAGE;
 
     }
 
-    public String returnItem(String title, ItemType type){
+    public String returnItem(String title, User user, ItemType type){
         LibraryItem selectedItemForReturn = type.createItemForTitle(title);
 
-        if(!hasChecked(selectedItemForReturn)){
+        if(!hasChecked(selectedItemForReturn, user)){
             return Messages.UNSUCCESSFUL_RETURN_MESSAGE;
         }
-        int indexOfItem = checkoutListOfItems.indexOf(selectedItemForReturn);
-        items.add(checkoutListOfItems.remove(indexOfItem));
+        items.add(user.returnItem(selectedItemForReturn));
         return Messages.SUCCESSFUL_RETURN_MESSAGE;
     }
 }

@@ -1,30 +1,33 @@
 package biblioteca.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorizedUsers {
     private final List<User> validUsers;
-    private final List<User> loggedInUsers;
+    private User loggedInUser;
 
     public AuthorizedUsers(List<User> validUsers) {
         this.validUsers = validUsers;
-        this.loggedInUsers = new ArrayList<>();
+        loggedInUser = null;
     }
 
-    public boolean isValidUser(User user){
+    public boolean isValidUser(User user) {
         return validUsers.contains(user);
     }
 
-    public boolean isLoggedIn(){
-        return !loggedInUsers.isEmpty();
+    public boolean isLoggedIn() {
+        return !(loggedInUser == null);
     }
 
-    public void logIn(User user){
-        loggedInUsers.add(user);
+    public User fetchLoggedInUser() {
+        return loggedInUser;
     }
 
-    public boolean logout(User user){
-        return loggedInUsers.remove(user);
+    public void logIn(User user) {
+        loggedInUser = validUsers.get(validUsers.indexOf(user));
+    }
+
+    public void logout() {
+        loggedInUser = null;
     }
 }

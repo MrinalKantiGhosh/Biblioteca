@@ -1,4 +1,4 @@
-package biblioteca.controller;
+package biblioteca.controller.command;
 
 import biblioteca.common.Messages;
 import biblioteca.controller.command.CheckoutItem;
@@ -18,13 +18,16 @@ class CheckoutItemTest {
     InputDriver inputDriver;
     OutputDriver outputDriver;
     AuthorizedUsers authorizedUsers;
+    User user;
 
     @BeforeEach
     void init(){
-        authorizedUsers = new AuthorizedUsers(new UserRepository().getUsers());
+        authorizedUsers = mock(AuthorizedUsers.class);
         library = mock(Library.class);
         outputDriver = mock(OutputDriver.class);
         inputDriver = mock(InputDriver.class);
+        user = mock(User.class);
+        when(authorizedUsers.fetchLoggedInUser()).thenReturn(user);
     }
 
     @DisplayName("check performCommand for successful checkout of book")
@@ -33,7 +36,7 @@ class CheckoutItemTest {
         CheckoutItem checkoutItem = new CheckoutItem(ItemType.BOOK);
 
         when(inputDriver.getInputString()).thenReturn("book1");
-        when(library.checkoutItem("book1", ItemType.BOOK)).thenReturn(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
+        when(library.checkoutItem("book1", user, ItemType.BOOK)).thenReturn(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
         checkoutItem.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
         verify(outputDriver).println(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
@@ -48,7 +51,7 @@ class CheckoutItemTest {
         CheckoutItem checkoutItem = new CheckoutItem(ItemType.BOOK);
 
         when(inputDriver.getInputString()).thenReturn("book1");
-        when(library.checkoutItem("book1", ItemType.BOOK)).thenReturn(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
+        when(library.checkoutItem("book1", user, ItemType.BOOK)).thenReturn(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
         checkoutItem.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
         verify(outputDriver).println(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
@@ -63,7 +66,7 @@ class CheckoutItemTest {
         CheckoutItem checkoutItem = new CheckoutItem(ItemType.MOVIE);
 
         when(inputDriver.getInputString()).thenReturn("movie1");
-        when(library.checkoutItem("movie1", ItemType.MOVIE)).thenReturn(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
+        when(library.checkoutItem("movie1", user, ItemType.MOVIE)).thenReturn(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
         checkoutItem.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
         verify(outputDriver).println(Messages.SUCCESSFUL_CHECKOUT_MESSAGE);
@@ -78,7 +81,7 @@ class CheckoutItemTest {
         CheckoutItem checkoutItem = new CheckoutItem(ItemType.MOVIE);
 
         when(inputDriver.getInputString()).thenReturn("movie1");
-        when(library.checkoutItem("movie1", ItemType.MOVIE)).thenReturn(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
+        when(library.checkoutItem("movie1", user, ItemType.MOVIE)).thenReturn(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);
         checkoutItem.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
         verify(outputDriver).println(Messages.UNSUCCESSFUL_CHECKOUT_MESSAGE);

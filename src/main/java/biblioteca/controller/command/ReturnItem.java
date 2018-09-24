@@ -18,6 +18,6 @@ public class ReturnItem implements Command {
         outputDriver.print(Messages.ASK_FOR_ITEM_NAME_TO_RETURN);
         String title = inputDriver.getInputString();
 
-        outputDriver.println(library.returnItem(title, type));
+        outputDriver.println(library.returnItem(title, authorizedUsers.fetchLoggedInUser(), type));
     }
 }

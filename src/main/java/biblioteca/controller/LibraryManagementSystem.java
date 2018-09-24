@@ -51,7 +51,7 @@ public class LibraryManagementSystem {
         for(int itr = 0; itr < Menu.values().length; itr++){
             outputDriver.println(Menu.values()[itr].getMessage());
         }
-        outputDriver.println(Messages.ASK_FOR_INPUT_FROM_THE_USER);
+        outputDriver.print(Messages.ASK_FOR_INPUT_FROM_THE_USER);
     }
 
 }

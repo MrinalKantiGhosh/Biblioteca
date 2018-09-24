@@ -19,11 +19,13 @@ public enum Menu {
     },
     LIST_MOVIE("List Movie", new ListItem(ItemType.MOVIE)) {
     },
-    CHECKOUT_MOVIE("Checkout Movie", new CheckoutItem(ItemType.MOVIE)) {
+    CHECKOUT_MOVIE("Checkout Movie", new AuthorizedCommand(new CheckoutItem(ItemType.MOVIE))) {
     },
-    RETURN_MOVIE("Return Movie", new ReturnItem(ItemType.MOVIE)){
+    RETURN_MOVIE("Return Movie", new AuthorizedCommand(new ReturnItem(ItemType.MOVIE))){
     },
     LOGIN("Log In", new LogIn()){
+    },
+    LOGOUT("Log Out", new LogOut()){
     };
 
     void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver, AuthorizedUsers authorizedUsers){

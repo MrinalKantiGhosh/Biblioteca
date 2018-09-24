@@ -10,39 +10,32 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorizedUsersTest {
-    AuthorizedUsers authorizedUsers;
-    User validUser;
-    User unvalidUser;
+    private AuthorizedUsers authorizedUsers;
+    private User validUser;
+
     @BeforeEach
-    void init(){
+    void init() {
         authorizedUsers = new AuthorizedUsers(new UserRepository().getUsers());
         validUser = new User(new UserId("def-5678"), new Password("def"));
-        unvalidUser = new User(new UserId("dfa-3453"), new Password("233"));
-    }
-
-    @DisplayName("return true when user is log in")
-    @Test
-    void returnTrueForSuccessfulLogOut(){
-        authorizedUsers.logIn(validUser);
-        assertTrue(authorizedUsers.logout(validUser));
-    }
-
-    @DisplayName("return false when un-valid user try to log in")
-    @Test
-    void returnFalseForUnSuccessfulLogOut(){
-        assertFalse(authorizedUsers.logout(validUser));
     }
 
     @DisplayName("return true if user is already logged in")
     @Test
-    void returnTrueIfAlreadyLoggedIn(){
+    void returnTrueIfAlreadyLoggedIn() {
         authorizedUsers.logIn(validUser);
         assertTrue(authorizedUsers.isLoggedIn());
     }
 
     @DisplayName("return false if user is not logged in")
     @Test
-    void returnFalseIfNotLoggedIn(){
+    void returnFalseIfNotLoggedIn() {
         assertFalse(authorizedUsers.isLoggedIn());
+    }
+
+    @DisplayName("get current logged in user")
+    @Test
+    void fetchCurrentlyLoggedInUser() {
+        authorizedUsers.logIn(validUser);
+        assertEquals(validUser, authorizedUsers.fetchLoggedInUser());
     }
 }
