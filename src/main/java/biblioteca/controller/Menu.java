@@ -15,7 +15,7 @@ public enum Menu {
     },
     CHECKOUT_BOOK("Checkout Book", new AuthorizedCommand(new CheckoutItem(ItemType.BOOK))) {
     },
-    RETURN_BOOK("Return Book", new ReturnItem(ItemType.BOOK)){
+    RETURN_BOOK("Return Book", new AuthorizedCommand(new ReturnItem(ItemType.BOOK))){
     },
     LIST_MOVIE("List Movie", new ListItem(ItemType.MOVIE)) {
     },
