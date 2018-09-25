@@ -3,7 +3,6 @@ package biblioteca.controller.command;
 import biblioteca.common.Messages;
 import biblioteca.model.AuthorizedUsers;
 import biblioteca.model.Library;
-import biblioteca.model.libraryItems.ItemType;
 import biblioteca.view.InputDriver;
 import biblioteca.view.OutputDriver;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +14,7 @@ import static org.mockito.Mockito.*;
 
 class AuthorizedCommandTest {
     private Library library;
-    private CheckoutItem checkoutItem;
+    private CheckoutItemCommand checkoutItemCommand;
     private AuthorizedUsers authorizedUsers;
     private AuthorizedCommand authorizedCommand;
     private OutputDriver outputDriver;
@@ -23,9 +22,9 @@ class AuthorizedCommandTest {
     @BeforeEach
     @Test
     void init(){
-        checkoutItem = mock(CheckoutItem.class);
+        checkoutItemCommand = mock(CheckoutItemCommand.class);
         authorizedUsers = mock(AuthorizedUsers.class);
-        authorizedCommand = new AuthorizedCommand(checkoutItem);
+        authorizedCommand = new AuthorizedCommand(checkoutItemCommand);
         library = mock(Library.class);
         outputDriver = mock(OutputDriver.class);
         inputDriver = mock(InputDriver.class);
@@ -38,7 +37,7 @@ class AuthorizedCommandTest {
         when(authorizedUsers.isLoggedIn()).thenReturn(true);
         authorizedCommand.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
-        verify(checkoutItem).performCommand(library, outputDriver, inputDriver, authorizedUsers);
+        verify(checkoutItemCommand).performCommand(library, outputDriver, inputDriver, authorizedUsers);
     }
 
     @DisplayName("check for unsuccessful authorization")

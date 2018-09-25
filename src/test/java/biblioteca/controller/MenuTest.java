@@ -30,6 +30,7 @@ class MenuTest {
         authorizedUsers = mock(AuthorizedUsers.class);
         user = mock(User.class);
         when(authorizedUsers.fetchLoggedInUser()).thenReturn(user);
+        when(authorizedUsers.isLoggedIn()).thenReturn(true);
     }
 
     @DisplayName("check perform action for List books")

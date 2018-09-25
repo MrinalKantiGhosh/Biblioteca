@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class LogOutTest {
+class LogOutCommandTest {
     private Library library;
     private OutputDriver outputDriver;
     private InputDriver inputDriver;
@@ -33,20 +33,20 @@ class LogOutTest {
     @DisplayName("check log out when not logged into the system")
     @Test
     void checkForNotLoggedInTheSystem(){
-        LogOut logOut = new LogOut();
+        LogOutCommand logOutCommand = new LogOutCommand();
 
         when(authorizedUsers.isLoggedIn()).thenReturn(false);
-        logOut.performCommand(library, outputDriver,inputDriver, authorizedUsers);
+        logOutCommand.performCommand(library, outputDriver,inputDriver, authorizedUsers);
         verify(outputDriver).println(Messages.NOT_LOGGED_IN_YET);
     }
 
     @DisplayName("check for logged into the system")
     @Test
     void checkForLogOutFromTheSystem(){
-        LogOut logOut = new LogOut();
+        LogOutCommand logOutCommand = new LogOutCommand();
 
         when(authorizedUsers.isLoggedIn()).thenReturn(true);
-        logOut.performCommand(library, outputDriver,inputDriver, authorizedUsers);
+        logOutCommand.performCommand(library, outputDriver,inputDriver, authorizedUsers);
         verify(outputDriver).println(Messages.SUCCESSFUL_LOG_OUT);
     }
 }

@@ -9,25 +9,25 @@ import biblioteca.view.InputDriver;
 import biblioteca.view.OutputDriver;
 
 public enum Menu {
-    QUIT("Quit", new Quit()) {
+    QUIT("QuitCommand", new QuitCommand()) {
     },
-    LIST_BOOKS("List Books", new ListItem(ItemType.BOOK)) {
+    LIST_BOOKS("List Books", new ListItemCommand(ItemType.BOOK)) {
     },
-    CHECKOUT_BOOK("Checkout Book", new AuthorizedCommand(new CheckoutItem(ItemType.BOOK))) {
+    CHECKOUT_BOOK("Checkout Book", new AuthorizedCommand(new CheckoutItemCommand(ItemType.BOOK))) {
     },
-    RETURN_BOOK("Return Book", new AuthorizedCommand(new ReturnItem(ItemType.BOOK))){
+    RETURN_BOOK("Return Book", new AuthorizedCommand(new ReturnItemCommand(ItemType.BOOK))){
     },
-    LIST_MOVIE("List Movie", new ListItem(ItemType.MOVIE)) {
+    LIST_MOVIE("List Movie", new ListItemCommand(ItemType.MOVIE)) {
     },
-    CHECKOUT_MOVIE("Checkout Movie", new AuthorizedCommand(new CheckoutItem(ItemType.MOVIE))) {
+    CHECKOUT_MOVIE("Checkout Movie", new AuthorizedCommand(new CheckoutItemCommand(ItemType.MOVIE))) {
     },
-    RETURN_MOVIE("Return Movie", new AuthorizedCommand(new ReturnItem(ItemType.MOVIE))){
+    RETURN_MOVIE("Return Movie", new AuthorizedCommand(new ReturnItemCommand(ItemType.MOVIE))){
     },
-    LOGIN("Log In", new LogIn()){
+    LOGIN("Log In", new LogInCommand()){
     },
-    LOGOUT("Log Out", new LogOut()){
+    LOGOUT("Log Out", new LogOutCommand()){
     },
-    USERDETAILS("User Details", new AuthorizedCommand(new UserDetails()));
+    USERDETAILS("User Details", new AuthorizedCommand(new UserDetailsCommand()));
 
     void performAction(Library library, OutputDriver outputDriver, InputDriver inputDriver, AuthorizedUsers authorizedUsers){
         this.command.performCommand(library, outputDriver, inputDriver, authorizedUsers);

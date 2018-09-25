@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import static biblioteca.common.Messages.*;
 import static org.mockito.Mockito.*;
 
-class LogInTest {
+class LogInCommandTest {
     private Library library;
     private OutputDriver outputDriver;
     private InputDriver inputDriver;
@@ -31,9 +31,9 @@ class LogInTest {
     @DisplayName("expect already logged in")
     @Test
     void checkAlreadyLogIn(){
-        LogIn logIn = new LogIn();
+        LogInCommand logInCommand = new LogInCommand();
         when(authorizedUsers.isLoggedIn()).thenReturn(true);
-        logIn.performCommand(library, outputDriver, inputDriver, authorizedUsers);
+        logInCommand.performCommand(library, outputDriver, inputDriver, authorizedUsers);
         verify(outputDriver).println(ALREADY_LOGGED_IN);
 
     }
@@ -41,10 +41,10 @@ class LogInTest {
     @DisplayName("expect Not a valid user")
     @Test
     void checkInvalidUser(){
-        LogIn logIn = new LogIn();
+        LogInCommand logInCommand = new LogInCommand();
         when(authorizedUsers.isLoggedIn()).thenReturn(false);
         when(authorizedUsers.isValidUser(user)).thenReturn(false);
-        logIn.performCommand(library, outputDriver, inputDriver, authorizedUsers);
+        logInCommand.performCommand(library, outputDriver, inputDriver, authorizedUsers);
         verify(outputDriver).println(NOT_A_VALID_USER);
 
     }

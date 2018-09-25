@@ -10,7 +10,7 @@ import biblioteca.view.OutputDriver;
 
 import static biblioteca.common.Messages.*;
 
-public class LogIn implements Command {
+public class LogInCommand implements Command {
     @Override
     public void performCommand(Library library, OutputDriver outputDriver, InputDriver inputDriver, AuthorizedUsers authorizedUsers) {
         if (!authorizedUsers.isLoggedIn()) {

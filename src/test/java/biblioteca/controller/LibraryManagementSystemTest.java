@@ -52,7 +52,7 @@ class LibraryManagementSystemTest {
     @DisplayName("test for invalid input option")
     @Test
     void testForValid(){
-        when(inputDriver.getInputInteger()).thenReturn(9).thenReturn(0);
+        when(inputDriver.getInputInteger()).thenReturn(90).thenReturn(0);
         libraryManagementSystem.start();
         verify(outputDriver).println(Messages.ASK_FOR_VALID_INPUT);
     }

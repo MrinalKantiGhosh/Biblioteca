@@ -12,18 +12,18 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
 
-class QuitTest {
+class QuitCommandTest {
     @DisplayName("checking exit message")
     @Test
     void testExitMessage(){
         Library library = mock(Library.class);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
-        Quit quit = new Quit();
+        QuitCommand quitCommand = new QuitCommand();
         AuthorizedUsers authorizedUsers = new AuthorizedUsers(new UserRepository().getUsers());
 
 
-        quit.performCommand(library, outputDriver, inputDriver, authorizedUsers);
+        quitCommand.performCommand(library, outputDriver, inputDriver, authorizedUsers);
 
         verify(outputDriver).println(Messages.EXIT_MESSAGE);
     }

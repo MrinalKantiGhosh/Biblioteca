@@ -1,20 +1,19 @@
 package biblioteca.controller.command;
 
+import biblioteca.common.Messages;
 import biblioteca.model.AuthorizedUsers;
-import biblioteca.model.libraryItems.ItemType;
 import biblioteca.model.Library;
 import biblioteca.view.InputDriver;
 import biblioteca.view.OutputDriver;
 
-public class ListItem implements Command {
-    private final ItemType type;
-
-    public ListItem(ItemType type) {
-        this.type = type;
-    }
-
+public class LogOutCommand implements Command {
     @Override
     public void performCommand(Library library, OutputDriver outputDriver, InputDriver inputDriver, AuthorizedUsers authorizedUsers) {
-        outputDriver.printListOfItems(library.getLibraryItemDetails(type));
+        if(authorizedUsers.isLoggedIn()){
+            authorizedUsers.logout();
+            outputDriver.println(Messages.SUCCESSFUL_LOG_OUT);
+        }else{
+            outputDriver.println(Messages.NOT_LOGGED_IN_YET);
+        }
     }
 }
