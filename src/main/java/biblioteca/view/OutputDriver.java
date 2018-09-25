@@ -26,11 +26,10 @@ public class OutputDriver {
 
     public void printUserDetails(String details){
         String detailOfIndividualBook[] = details.split(",");
-        for(String detail : detailOfIndividualBook){
-            String line = padLeft(detail);
-            print(line);
-        }
-        println("\n");
+        print("Name : " + detailOfIndividualBook[0]);
+        print("email : " + detailOfIndividualBook[1]);
+        print("Phone Numebr : " + detailOfIndividualBook[2]);
+        print("\n");
     }
 
     public static String padRight(String string) {
